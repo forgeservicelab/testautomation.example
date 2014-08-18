@@ -15,7 +15,7 @@ Client running these test need. For installing these there is a Ansible playbook
 Variables
 ---------
 
-See common submodule 
+See common folder
 
 
 Tests:
