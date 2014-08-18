@@ -1,0 +1,4 @@
+*** Variables ***
+${AUTH_URL}    https://auth.forgeservicelab.fi
+${GIT_URL}    https://gitlab-test.forgeservicelab.fi
+

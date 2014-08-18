@@ -1,0 +1,29 @@
+*** Settings ***
+Documentation    This is a example test automation script that logins to Forge gitlab server with CAS and LDAP with incorrect credentials. This is for demonstrating test data driven test automation
+Suite Setup    Go to git
+Suite Teardown    Close All Browsers
+Test Template    Git Login with LDAP invalid credentials
+Resource    ./common/assets/secrets.txt
+Resource    ./common/assets/resource.txt
+Resource    local_resource.txt
+
+*** Variables ***
+${USER}    ${VALID_SERVICE_DEVELOPER}
+${PASSWORD}    ${VALID_SERVICE_DEVELOPER_PASSWORD}
+
+*** Test Cases ***
+Login FAIL Special Characters    we#¤%%&/    wwww
+Login FAIL Wrong Password    ${USER}    wrongpwd
+Login FAIL Wrong Username    ???        ${PASSWORD}
+
+
+*** Keywords ***
+Git Login with LDAP invalid credentials
+    [Arguments]    ${usr}    ${pwd}
+    Go to     ${GIT_URL}
+    Input Text    id=username    ${usr}
+    Set Log Level    NONE
+    Input Text    id=password    ${pwd}
+    Set Log Level    DEBUG
+    Click Element    name=commit
+    Wait Until Page Contains    Invalid credentials
